@@ -32,6 +32,7 @@ if __name__ == '__main__':
 
 
         with open(f + ".new", "w") as output:
+            output.write("doc_id word_id freq\n")
             for key, dict_word in dict_doc.items():
                 for word, freq in dict_word.items():
                     cpt_new += 1
