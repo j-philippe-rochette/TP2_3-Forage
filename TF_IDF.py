@@ -2,6 +2,9 @@ import sys
 import pandas as pd
 import math
 
+MIN_TF_IDF = 40
+MAX_TF_IDF = 300
+
 if __name__ == '__main__':
     # Key= doc_id
     # Value= Dict (Key= word_id
@@ -32,9 +35,10 @@ if __name__ == '__main__':
     # TF-IDF
     N = len(dict_tf)
     with open("docword_tf-idf.txt", "w") as output:
-        output.write("doc_id word_id tf-idf\n")
+        output.write("doc_id word_id tf_idf\n")
         for doc, dict_word in dict_tf.items():
             for word, freq in dict_word.items():
                 tf_idf = dict_tf[doc][word] * math.log(N/(1 + dict_idf[word]))
-                output.write("{} {} {}\n".format(doc, word, tf_idf))
+                if tf_idf > MIN_TF_IDF and tf_idf <= MAX_TF_IDF:
+                    output.write("{} {} {}\n".format(doc, word, tf_idf))
 
