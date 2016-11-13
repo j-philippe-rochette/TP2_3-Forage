@@ -343,7 +343,8 @@ class PorterStemmer:
         self.step5()
         return self.b[self.k0:self.k+1]
 
-
+# INPUT: File with all the words.
+# OUTPUT: Same file but with all the words chopped down to only keep their stem.
 if __name__ == '__main__':
     p = PorterStemmer()
     if len(sys.argv) > 1:

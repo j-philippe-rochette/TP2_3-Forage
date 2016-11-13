@@ -2,10 +2,11 @@ import sys
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# INPUT: A docword file with the structure "doc_id word_id tf". Not part of the main algorithm.
 if __name__ == '__main__':
     f = sys.argv[1]
     df = pd.read_csv(f, delimiter=" ", encoding="iso8859_15")
-    df_short = df['tf_idf']
+    df_short = df['tf']
 
     print(df_short.quantile([0, 0.25, 0.5, 0.75, 1]))
     print(len(df_short.index))

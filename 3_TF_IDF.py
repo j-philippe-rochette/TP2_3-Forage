@@ -2,8 +2,12 @@ import sys
 import pandas as pd
 import math
 
-MIN_TF_IDF = 40
+MIN_TF_IDF = 35
 MAX_TF_IDF = 300
+
+# INPUT: Docwords files with the structure (and first line) "doc_id word_id freq"
+# OUTPUT: A file named "docwords_all.txt" with the structure "doc_id word_id tf".
+#         Only keep the lines where the TF-IDF is between [MIN_TF_IDF, MAX_TF_IDF[.
 
 if __name__ == '__main__':
     # Key= doc_id
@@ -34,11 +38,11 @@ if __name__ == '__main__':
 
     # TF-IDF
     N = len(dict_tf)
-    with open("docword_tf-idf.txt", "w") as output:
-        output.write("doc_id word_id tf_idf\n")
+    with open("docword_all.txt", "w") as output:
+        output.write("doc_id word_id tf\n")
         for doc, dict_word in dict_tf.items():
             for word, freq in dict_word.items():
                 tf_idf = dict_tf[doc][word] * math.log(N/(1 + dict_idf[word]))
                 if tf_idf > MIN_TF_IDF and tf_idf <= MAX_TF_IDF:
-                    output.write("{} {} {}\n".format(doc, word, tf_idf))
+                    output.write("{} {} {}\n".format(doc, word, dict_tf[doc][word]))
 

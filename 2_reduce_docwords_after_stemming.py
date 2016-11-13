@@ -1,6 +1,10 @@
 import sys
 import pandas as pd
 
+# INPUT: First file is the file from reduce_after_stemming. {id of the word} {new id of the word}
+#        The other files are all the docwords with the first line "doc_id word_id freq"
+# OUTPUT: Files with the same name as the docwords in input and with the same structure, but where all words that have
+#             the same stem are merged and their frequency is adjusted consequently.
 if __name__ == '__main__':
     # Create a dictionary with all the associations id -> new_id
     f_reduce = sys.argv[1]
@@ -28,8 +32,6 @@ if __name__ == '__main__':
                 dict_doc[row.doc_id][new_id] = 0
 
             dict_doc[row.doc_id][new_id] +=  row.freq
-
-
 
         with open(f + ".new", "w") as output:
             output.write("doc_id word_id freq\n")

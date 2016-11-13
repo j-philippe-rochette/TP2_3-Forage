@@ -1,6 +1,9 @@
 import sys
 import pandas as pd
 
+# INPUT: First file is a word file with the structure "id word".
+#        Second file is a docword file with the structure "doc_id word_id {tf_idf or tf}"
+# OUTPUT: Print the same docword but the id_word is replaced by the word itself.
 if __name__ == '__main__':
     f_name = sys.argv[1]
     df_name = pd.read_csv(f_name, delimiter=" ", encoding="iso8859_15")
@@ -21,7 +24,3 @@ if __name__ == '__main__':
         print(dict_name[key])
 
     print(len(list_word))
-
-#    print("doc_id word_id tf_idf")
-#    for row in df_tf_idf.itertuples():
-#        print("{} {} {}".format(row.doc_id, dict_name[row.word_id], row.tf_idf))
