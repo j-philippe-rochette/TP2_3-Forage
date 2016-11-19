@@ -11,6 +11,7 @@ if __name__ == '__main__':
     df_reduce  = pd.read_csv(f_reduce, delimiter=" ")
     dict_reduce = {}
 
+    # Don't know why I did that...
     for row in df_reduce.itertuples():
         dict_reduce[row.id] = row.new_id
 

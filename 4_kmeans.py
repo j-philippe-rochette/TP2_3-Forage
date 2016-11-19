@@ -3,11 +3,11 @@ import pandas as pd
 import random
 import math
 
-NB_CLUSTERS = 50
-NB_ITERATIONS = 1
+NB_CLUSTERS = 100
+NB_ITERATIONS = 50 
 
 
-# INPUT: A docword-style typy of file with the structure "doc_id word_id tf".
+# INPUT: A docword-style type of file with the structure "doc_id word_id tf".
 # OUTPUT: A file named "kmeans.txt" with the structure "cluster_id doc_id".
 if __name__ == '__main__':
     f = sys.argv[1]
@@ -26,8 +26,11 @@ if __name__ == '__main__':
 
     df_doc_to_cluster = pd.DataFrame.from_dict(list_doc, orient='index').rename(columns={0:"cluster"})
     list_doc.clear()
+    changed = True
 
     for it in range(NB_ITERATIONS):
+        if not changed:
+            break
         # Calculate the mean for every cluster
         # Key = Cluster
         # Value = Dictionary with Key = Word Id and Value = TF
@@ -95,6 +98,8 @@ if __name__ == '__main__':
             if old_cluster != new_cluster:
                 nb_change += 1
         print("For iteration {}, {} were changed.".format(it, nb_change))
+        if nb_change == 0:
+            changed = False
 
     # Print the results
     with open("kmeans.txt", "w") as output:

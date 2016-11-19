@@ -2,8 +2,8 @@ import sys
 import pandas as pd
 import math
 
-MIN_TF_IDF = 40
-MAX_TF_IDF = 44
+MIN_TF_IDF = 35
+MAX_TF_IDF = 40 
 
 # INPUT: Docwords files with the structure (and first line) "doc_id word_id freq"
 # OUTPUT: A file named "docwords_all.txt" with the structure "doc_id word_id tf".
@@ -14,6 +14,8 @@ if __name__ == '__main__':
     # Value= Dict (Key= word_id
     #              Value= freq)
     dict_tf = {}
+    # Key= word_id
+    # Value= Nb of documents with this word
     dict_idf = {}
 
     # TF
