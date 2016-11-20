@@ -13,7 +13,7 @@ if __name__ == '__main__':
     f = sys.argv[1]
     df_doc_and_words = pd.read_csv(f, delimiter=" ").set_index('doc_id')
 
-    # Create a list of all the docs with a random cluster
+    # Create a dict of all the docs with a random cluster
     # Create a set of all the words
     random.seed()
     list_doc = {}
@@ -52,6 +52,7 @@ if __name__ == '__main__':
                         dict_means[c][word] = tf
                     else:
                         dict_means[c][word] += tf
+            # Divide each of them by the number of docs in the cluster to get an average
             nb_docs_in_cluster = len(df_doc_to_cluster.loc[df_doc_to_cluster["cluster"] == c])
             for word, tf in dict_means[c].items():
                 dict_means[c][word] = dict_means[c][word] / nb_docs_in_cluster
